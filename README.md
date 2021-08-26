@@ -1,6 +1,6 @@
 # CloudFront URL
 
-https://d2gev20tf1hiaz.cloudfront.net/
+https://d10p3p4omwyl56.cloudfront.net/
 
 # S3-website
 
