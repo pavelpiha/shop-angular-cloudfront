@@ -34,17 +34,19 @@ export class ProductsService extends ApiService {
     return this.http.get<Product>(url + `/${id}`);
   }
 
+  // createProduct(product: Omit<Product, 'id'>): Observable<Product> {
   createProduct(product: Omit<Product, 'id'>): Observable<Pick<Product, 'id'>> {
     const options = {
       headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': '*',
+        // 'Access-Control-Allow-Origin': '*',
+        // 'Access-Control-Allow-Headers': '*',
       },
     };
     if (!this.endpointEnabled('bff')) {
       console.warn(
         'Endpoint "bff" is disabled. To enable change your environment.ts config'
       );
+      // return this.http.post<Product>(PRODUCTS_PATH, product, options);
       return this.http.post<Pick<Product, 'id'>>(
         PRODUCTS_PATH,
         product,
@@ -53,6 +55,7 @@ export class ProductsService extends ApiService {
     }
     const url = this.getUrl('bff', 'products');
     return this.http.post<Pick<Product, 'id'>>(url, product, options);
+    // return this.http.post<Product>(url, product, options);
   }
 
   getProductsForCheckout(ids: string[]): Observable<Product[]> {
