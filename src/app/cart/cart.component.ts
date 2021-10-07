@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { CheckoutService } from './checkout.service';
-import { ProductCheckout } from '../products/product.model';
+import { Product, ProductCheckout } from '../products/product.model';
 import { Observable } from 'rxjs';
 import { CartService } from './cart.service';
 import { map, shareReplay } from 'rxjs/operators';
@@ -75,11 +75,11 @@ export class CartComponent implements OnInit {
     this.cartEmpty$ = this.totalInCart$.pipe(map((count) => count > 0));
   }
 
-  add(id: string): void {
-    this.cartService.addItem(id);
+  add(product: Product): void {
+    this.cartService.addItem(product);
   }
 
-  remove(id: string): void {
-    this.cartService.removeItem(id);
+  remove(product: Product): void {
+    this.cartService.removeItem(product);
   }
 }

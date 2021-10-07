@@ -32,11 +32,8 @@ export class ProductItemComponent implements OnInit {
   ngOnInit(): void {
     this.countInCart$ = this.cartService.cart$.pipe(
       map((cart) => {
-        if (!(this.id in cart)) {
-          return 0;
-        }
-
-        return cart[this.id];
+        const cartItem = cart.items.find((item) => item.product.id === this.id);
+        return cartItem?.count || 0;
       }),
       this.updateFocusIfNeeded(),
       shareReplay({
@@ -47,11 +44,11 @@ export class ProductItemComponent implements OnInit {
   }
 
   add(): void {
-    this.cartService.addItem(this.id);
+    this.cartService.addItem(this.product);
   }
 
   remove(): void {
-    this.cartService.removeItem(this.id);
+    this.cartService.removeItem(this.product);
   }
 
   /** Move focus to a corresponding control when controls switch */
